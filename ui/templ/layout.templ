@@ -1,6 +1,6 @@
 package templ
 
-templ Layout(posts []BlogPost) {
+templ Layout(content templ.Component) {
 	<html class="scroll-smooth">
 		<head>
 			<meta charset="UTF-8"/>
@@ -12,12 +12,7 @@ templ Layout(posts []BlogPost) {
 		</head>
 		<body class="flex flex-col min-h-screen" id="layout">
 			@Header()
-			<div id="content">
-				@Home()
-				@About()
-				@Blog(posts)
-				@Contact()
-			</div>
+			@Content(content)
 			@Footer()
 		</body>
 	</html>

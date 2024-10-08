@@ -7,10 +7,11 @@ import (
 
 func main() {
 	mux := http.NewServeMux()
-	mux.HandleFunc("/", Home)
-	mux.HandleFunc("/blog", Home)
-	mux.HandleFunc("/about", Home)
-	mux.HandleFunc("/contact", Home)
+	mux.HandleFunc("/", Index)
+	mux.HandleFunc("/home", Home)
+	mux.HandleFunc("/about", About)
+	mux.HandleFunc("/blog", Blog)
+	mux.HandleFunc("/contact", Contact)
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 
 
