@@ -1,8 +1,8 @@
 package main
 
 import (
+	"context"
 	"net/http"
-	"strings"
 	"time"
 
 	"github.com/christopats/go-blogv2/ui/templ"
@@ -31,47 +31,68 @@ func fetchBlogPost() []templ.BlogPost {
 	}
 }
 
-func Home(w http.ResponseWriter, r *http.Request) {
-	posts :=fetchBlogPost()
-	if r.Header.Get("HX-Request") == "true" {
-		section := strings.TrimPrefix(r.URL.Path, "/")
-		if section == "" {
-			section = "home"
-		}
+func Index(w http.ResponseWriter, r *http.Request) {
+	// posts :=fetchBlogPost()
 
-		switch section {
-		case "home":
-			templ.Home().Render(r.Context(), w)
-		case "about":
-			templ.About().Render(r.Context(), w)
-		case "blog":
-			templ.Blog(posts).Render(r.Context(), w)
-		case "contact":
-			templ.Contact().Render(r.Context(), w)
-		default:
-			http.NotFound(w, r)
-		}
+	if r.URL.Path != "/" {
+		http.NotFound(w, r)
+		return
+	}
+
+	w.Header().Set("Content-type", "text/html")
+	templ.Layout(templ.Home()).Render(context.Background(), w)
+}
+
+func Home(w http.ResponseWriter, r *http.Request) {
+	// posts :=fetchBlogPost()
+
+	if r.URL.Path != "/home" {
+		http.NotFound(w, r)
+		return
+	}
+	w.Header().Set("Content-type", "text/html")
+
+	if r.Header.Get("HX-Request") == "true" {
+		templ.Home().Render(context.Background(), w)
 	} else {
-		templ.Layout(posts).Render(r.Context(), w)
+		templ.Layout(templ.Home()).Render(context.Background(), w)
+	}
+
+	
+}
+
+func About(w http.ResponseWriter, r *http.Request) {
+	// posts :=fetchBlogPost()
+
+	if r.URL.Path != "/about" {
+		http.NotFound(w, r)
+		return
+	}
+
+	w.Header().Set("Content-type", "text/html")
+	
+	if r.Header.Get("HX-Request") == "true" {
+		templ.About().Render(context.Background(), w)
+	} else {
+		templ.Layout(templ.About()).Render(context.Background(), w)
 	}
 }
 
+func Blog(w http.ResponseWriter, r *http.Request) {
+	posts := fetchBlogPost()
 
-// func Layout(s string) {
-// 	panic("unimplemented")
-// }
+	if r.Header.Get("HX-Request") == "true" {
+		templ.Blog(posts).Render(r.Context(), w)
+	} else {
+		templ.Layout(templ.Blog(posts)).Render(r.Context(), w)
+	}
+}
 
-// func Blog(w http.ResponseWriter, r *http.Request) {
-// 	posts := fetchBlogPost()
-// 	templ.Blog(posts).Render(r.Context(), w)
+func Contact(w http.ResponseWriter, r *http.Request) {
+	if r.Header.Get("HX-Request") == "true" {
+		templ.Contact().Render(context.Background(), w)
+	} else {
+		templ.Layout(templ.Contact()).Render(context.Background(), w)
+	}
+}
 
-// }
-
-// func About(w http.ResponseWriter, r *http.Request) {
-// 	templ.About().Render(context.Background(), w)
-// }
-
-// func Contact(w http.ResponseWriter, r *http.Request) {
-// 	templ.Contact().Render(context.Background(), w)
-
-// }
