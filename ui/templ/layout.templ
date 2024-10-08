@@ -12,7 +12,9 @@ templ Layout(content templ.Component) {
 		</head>
 		<body class="flex flex-col min-h-screen" id="layout">
 			@Header()
-			@Content(content)
+			<div class="flex-grow flex flex-col">
+				@Content(content)
+			</div>
 			@Footer()
 		</body>
 	</html>

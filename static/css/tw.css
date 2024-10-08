@@ -1445,6 +1445,10 @@ html {
   flex: none;
 }
 
+.flex-grow {
+  flex-grow: 1;
+}
+
 .grid-flow-col {
   grid-auto-flow: column;
 }
