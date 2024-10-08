@@ -1,0 +1,23 @@
+# .air.toml
+root = "."
+tmp_dir = "tmp"
+
+[build]
+  cmd = "templ generate && go build -o ./tmp/main ./cmd/web"
+  bin = "./tmp/main"
+  delay = 1000 # ms
+  exclude_dir = ["assets", "tmp", "vendor", "ui/static"]
+  include_ext = ["go", "templ"]
+  exclude_regex = ["_test.go", "_templ\\.go"]
+
+[log]
+  time = false
+
+[color]
+  main = "magenta"
+  watcher = "cyan"
+  build = "yellow"
+  runner = "green"
+
+[misc]
+  clean_on_exit = true

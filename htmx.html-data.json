@@ -1,0 +1,25 @@
+{
+    "version": 1.1,
+    "globalAttributes": [
+        {
+            "name": "hx-get",
+            "description": "Issues a GET request to the specified URL"
+        },
+        {
+            "name": "hx-post",
+            "description": "Issues a POST request to the specified URL"
+        },
+        {
+            "name": "hx-trigger",
+            "description": "Specifies the event that triggers the request"
+        },
+        {
+            "name": "hx-target",
+            "description": "Specifies the target element to be updated"
+        },
+        {
+            "name": "hx-swap",
+            "description": "Specifies how the response will be swapped in"
+        }
+    ]
+}
