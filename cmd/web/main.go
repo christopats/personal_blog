@@ -11,6 +11,7 @@ func main() {
 	mux.HandleFunc("/home", Home)
 	mux.HandleFunc("/about", About)
 	mux.HandleFunc("/blog", Blog)
+	mux.HandleFunc("/blog/", BlogPost)
 	mux.HandleFunc("/contact", Contact)
 	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
 

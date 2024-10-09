@@ -11,11 +11,13 @@ import templruntime "github.com/a-h/templ/runtime"
 import "time"
 
 type BlogPost struct {
+	Slug        string
 	Title       string
 	Description string
 	Date        time.Time
 	Tags        []string
 	ImagePath   string
+	Content     string
 }
 
 func Blog(posts []BlogPost) templ.Component {

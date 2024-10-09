@@ -1,0 +1,24 @@
+package templ
+
+templ BlogArticle(post *BlogPost) {
+	<article>
+		<div>
+			<img src="{post.ImagePath}" alt=""/>
+		</div>
+		<div>
+			<h2>{ post.Title }</h2>
+			if len(post.Tags) > 0 {
+				<div>
+					for _, tag := range post.Tags {
+						<span class="badge badge-outline">{ tag } </span>
+					}
+				</div>
+			}
+			<p>{ post.Description }</p>
+			<small>{ post.Date.Format("Jan 02, 2006") }</small>
+		</div>
+		<div>
+			<p>{ post.Content }</p>
+		</div>
+	</article>
+}
