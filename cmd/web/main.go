@@ -13,7 +13,7 @@ func main() {
 	mux.HandleFunc("/blog", Blog)
 	mux.HandleFunc("/blog/", BlogPost)
 	mux.HandleFunc("/contact", Contact)
-	mux.Handle("/static/", http.StripPrefix("/static/", http.FileServer(http.Dir("static"))))
+	mux.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 
 
 	log.Println("Starting server on :4000")

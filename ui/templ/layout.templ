@@ -1,20 +1,18 @@
 package templ
 
 templ Layout(content templ.Component) {
-	<html class="scroll-smooth">
+	<html lang="en">
 		<head>
 			<meta charset="UTF-8"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+			<link rel="stylesheet" href="css/styles.css"/>
 			<link rel="stylesheet" href="https://use.typekit.net/pmg0dmv.css"/>
-			<link rel="stylesheet" type="text/css" href="static/css/main.css"/>
 			<script src="https://unpkg.com/htmx.org@2.0.2" integrity="sha384-Y7hw+L/jvKeWIRRkqWYfPcvVxHzVzn5REgzbawhxAuQGwX1XWe70vji+VSeHOThJ" crossorigin="anonymous"></script>
 			<title>Document</title>
 		</head>
-		<body class="flex flex-col min-h-screen" id="layout">
+		<body id="layout">
 			@Header()
-			<div class="flex-grow flex flex-col">
-				@Content(content)
-			</div>
+			@Content(content)
 			@Footer()
 		</body>
 	</html>
