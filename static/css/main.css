@@ -1,4 +1,68 @@
-.btn.logo {
-    font-size: 3.75rem;
-    height: auto;
+:root {
+
+    /* COLOUR */
+
+    --color-bg-primary: #121c22;
+    --color-bg-secondary: #151e26;
+    --color-text-primary: #ffffff;
+    --color-text-secondary: #bdbdbf;
+    --color-accent: #50f7d1;
+
+    /* FONT */
+
+    --font-family: "figtree", sans-serif;
+
+    --font-size-display-large: 6rem;
+    --font-size-display-medium: 3.25rem;
+    --font-size-display-small: 2.75rem;
+    --font-size-display-xsmall: 2.25rem;
+    --font-size-heading-xxlarge: 2.5rem;
+    --font-size-heading-xlarge: 2.25rem;
+    --font-size-heading-large: 2rem;
+    --font-size-heading-medium: 1.75rem;
+    --font-size-heading-small: 1.5rem;
+    --font-size-heading-xsmall: 1.25rem;
+    --font-size-labels-large: 1.125rem;
+    --font-size-labels-medium: 1rem;
+    --font-size-labels-small: 0.875rem;
+    --font-size-labels-xsmall: 0.75rem;
+    --font-size-paragraph-large: 1.125rem;
+    --font-size-paragraph-medium: 1rem;
+    --font-size-paragraph-small: 0.875rem;
+    --font-size-paragraph-xsmall: 0.75rem;
+
+    --font-weight-display: 700;
+    --font-weight-heading: 700;
+    --font-weight-labels: 500;
+    --font-weight-paragraph: 400;
+
+    /* SPACING */
+
+    --padding-xlarge: 4rem;
+    --padding-large: 3rem;
+    --padding-medium: 2.25rem;
+    --padding-small: 1.5rem;
+    --padding-xsmall: 1rem;
+    --padding-xxsmall: 0.75rem;
+
+    --margin-xlarge: 4rem;
+    --margin-large: 3rem;
+    --margin-medium: 2.25rem;
+    --margin-small: 1.5rem;
+    --margin-xsmall: 1rem;
+    --margin-xxsmall: 0.75rem;
+
+    --gap-xlarge: 4rem;
+    --gap-large: 3rem;
+    --gap-medium: 2.25rem;
+    --gap-small: 1.5rem;
+    --gap-xsmall: 1rem;
+    --gap-xxsmall: 0.75rem;
+
+    /* CORNER RADIUS */
+
+    --corner-radius-large: 16px;
+    --corner-radius-medium: 12px;
+    --corner-radius-small: 8px;
+    --corner-radius-xsmall: 4px;
 }
