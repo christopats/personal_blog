@@ -35,6 +35,38 @@ func fetchBlogPost() []templ.BlogPost {
 			Tags: []string{"Go", "HTMX", "Tailwind", "DaisyUI"},
 			Content: "Hello, World! Check out this insightful blog post",
 		},
+		{
+			Slug: "example-post",
+			Title: "Third Blog Post",
+			Description: "Are you tired of blog posts yet?",
+			Date: time.Now().AddDate(0, 0, -5),
+			Tags: []string{"Go", "HTMX", "Tailwind", "DaisyUI"},
+			Content: "Hello, World! Check out this insightful blog post",
+		},
+		{
+			Slug: "example-post",
+			Title: "Third Blog Post",
+			Description: "Are you tired of blog posts yet?",
+			Date: time.Now().AddDate(0, 0, -5),
+			Tags: []string{"Go", "HTMX", "Tailwind", "DaisyUI"},
+			Content: "Hello, World! Check out this insightful blog post",
+		},
+		{
+			Slug: "example-post",
+			Title: "Third Blog Post",
+			Description: "Are you tired of blog posts yet?",
+			Date: time.Now().AddDate(0, 0, -5),
+			Tags: []string{"Go", "HTMX", "Tailwind", "DaisyUI"},
+			Content: "Hello, World! Check out this insightful blog post",
+		},
+		{
+			Slug: "example-post",
+			Title: "Third Blog Post",
+			Description: "Are you tired of blog posts yet?",
+			Date: time.Now().AddDate(0, 0, -5),
+			Tags: []string{"Go", "HTMX", "Tailwind", "DaisyUI"},
+			Content: "Hello, World! Check out this insightful blog post",
+		},
 	}
 }
 
