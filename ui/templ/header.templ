@@ -2,45 +2,73 @@ package templ
 
 templ Header() {
 	<header>
-		<div class="navbar bg-base-100">
-			<div class="flex-1 ">
+		<div class="navbar">
+			<div class="flex">
 				<a
 					hx-get="/home"
 					hx-target="#content"
 					hx-push-url="true"
-					class=" btn logo btn-ghost "
-				>C</a>
+				><img src="css/logo-nav.png" class="logo" height="60" width="auto" alt=""/></a>
 			</div>
-			<div class="flex-none">
-				<ul class="flex gap-4">
-					<li>
-						<a
-							hx-get="/about"
-							hx-target="#content"
-							hx-swap="innerHTML"
-							hx-push-url="true"
-							class="btn btn-ghost"
-						>About Me</a>
-					</li>
-					<li>
-						<a
-							hx-get="/blog"
-							hx-target="#content"
-							hx-swap="innerHTML "
-							hx-push-url="true"
-							class="btn btn-ghost"
-						>Blog</a>
-					</li>
-					<li>
-						<a
-							hx-get="/contact"
-							hx-target="#content"
-							hx-swap="innerHTML "
-							hx-push-url="true"
-							class="btn btn-ghost"
-						>Contact</a>
-					</li>
-				</ul>
+			// <div class="flex-none">
+			// 	<ul class="navlinks-desktop">
+			// 		<li>
+			// 			<a
+			// 				hx-get="/about"
+			// 				hx-target="#content"
+			// 				hx-swap="innerHTML"
+			// 				hx-push-url="true"
+			// 				class="btn btn-ghost"
+			// 			>About Me</a>
+			// 		</li>
+			// 		<li>
+			// 			<a
+			// 				hx-get="/blog"
+			// 				hx-target="#content"
+			// 				hx-swap="innerHTML "
+			// 				hx-push-url="true"
+			// 				class="btn btn-ghost"
+			// 			>Blog</a>
+			// 		</li>
+			// 		<li>
+			// 			<a
+			// 				hx-get="/contact"
+			// 				hx-target="#content"
+			// 				hx-swap="innerHTML "
+			// 				hx-push-url="true"
+			// 				class="btn btn-ghost"
+			// 			>Contact</a>
+			// 		</li>
+			// 	</ul>
+			// </div>
+			// <div x-data="{ open: false }" class="flex-col">
+			// 	<button @click="open = !open" class="mobile-nav-button">
+			// 		<svg width="48px" height="48px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+			// 			<path d="M4 18L20 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path>
+			// 			<path d="M4 12L20 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path>
+			// 			<path d="M4 6L20 6" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path>
+			// 		</svg>
+			// 	</button>
+			// 	<ul x-show="open" @click.outside="open = false" class="navlinks-mobile">
+			// 		<li>About me</li>
+			// 		<li>Blog</li>
+			// 		<li>Contact</li>
+			// 	</ul>
+			// </div>
+			<div x-data="{ open: false }" class="items-center">
+				<!-- Burger Icon -->
+				<div class="burger" @click="open = !open">
+					<div></div>
+					<div></div>
+					<div></div>
+				</div>
+				<!-- Menu -->
+				<div class="menu" x-show="open" @click.outside="open = false">
+					<a href="#">Home</a>
+					<a href="#">About</a>
+					<a href="#">Services</a>
+					<a href="#">Contact</a>
+				</div>
 			</div>
 		</div>
 	</header>

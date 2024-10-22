@@ -15,7 +15,7 @@ type BlogPost struct {
 templ Blog(posts []BlogPost) {
 	<div class="">
 		<h1 class="text-3xl font-bold my-8">Blog Posts</h1>
-		<div class="container_grid_col">
+		<div class="grid_col_flex">
 			for _, post := range posts {
 				@BlogPostCard(post)
 			}

@@ -29,7 +29,7 @@ func Header() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<header><div class=\"navbar bg-base-100\"><div class=\"flex-1 \"><a hx-get=\"/home\" hx-target=\"#content\" hx-push-url=\"true\" class=\" btn logo btn-ghost \">C</a></div><div class=\"flex-none\"><ul class=\"flex gap-4\"><li><a hx-get=\"/about\" hx-target=\"#content\" hx-swap=\"innerHTML\" hx-push-url=\"true\" class=\"btn btn-ghost\">About Me</a></li><li><a hx-get=\"/blog\" hx-target=\"#content\" hx-swap=\"innerHTML \" hx-push-url=\"true\" class=\"btn btn-ghost\">Blog</a></li><li><a hx-get=\"/contact\" hx-target=\"#content\" hx-swap=\"innerHTML \" hx-push-url=\"true\" class=\"btn btn-ghost\">Contact</a></li></ul></div></div></header>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<header><div class=\"navbar\"><div class=\"flex\"><a hx-get=\"/home\" hx-target=\"#content\" hx-push-url=\"true\"><img src=\"css/logo-nav.png\" class=\"logo\" height=\"60\" width=\"auto\" alt=\"\"></a></div><div x-data=\"{ open: false }\" class=\"items-center\"><!-- Burger Icon --><div class=\"burger\" @click=\"open = !open\"><div></div><div></div><div></div></div><!-- Menu --><div class=\"menu\" x-show=\"open\" @click.outside=\"open = false\"><a href=\"#\">Home</a> <a href=\"#\">About</a> <a href=\"#\">Services</a> <a href=\"#\">Contact</a></div></div></div></header>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
