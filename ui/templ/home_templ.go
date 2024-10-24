@@ -29,7 +29,7 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><div><h1>Chris Pattison</h1><p>What a bloody nice Website!</p><span><button>Who I am</button> <button>What I do</button></span></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><div class=\"flow\"><p>Hello, I'm</p><h1>Chris Pattison</h1><h2>Full-stack Web Developer</h2><p>Crafting stunning, user-friendly web applications to solve real world problems</p><div class=\"flex gap-small\"><button class=\"button\">Who I am</button> <button class=\"button\" data-button-variant=\"ghost\">What I do</button></div></div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

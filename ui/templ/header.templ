@@ -3,7 +3,7 @@ package templ
 templ Header() {
 	<header>
 		<div class="navbar">
-			<div class="flex">
+			<div>
 				<a
 					hx-get="/home"
 					hx-target="#content"
@@ -11,14 +11,31 @@ templ Header() {
 				><img src="css/logo-nav.png" class="logo" height="60" width="auto" alt=""/></a>
 			</div>
 			<nav x-data="{ open: false }" class="nav">
-				<button @click="open = !open" :class="{ 'open': open }" class="burger-menu">
+				<button
+					@click="open = !open"
+					:class="{ 'open': open }"
+					class="burger-menu"
+				>
 					<div class="burger-line line1"></div>
 					<div class="burger-line line2"></div>
 					<div class="burger-line line3"></div>
 				</button>
-				<ul :class="{ 'open : open' }" x-transition.origin.top.right @click.outside="open = false" class="nav-items" role="list">
+				<ul
+					x-show="open"
+					x-transition:enter.duration.1100ms
+					x-transition:enter.scale.50
+					x-transition:leave..duration.400ms
+					x-transition:leave.scale.90
+					x-transition.scale.origin.top.right
+					:class="{ 'open : open' }"
+					@click.outside="open = false"
+					class="nav-items"
+					role="list"
+				>
 					<li class="nav-link">
 						<a
+							class="button"
+							data-button-variant="anchor"
 							hx-get="/about"
 							hx-target="#content"
 							hx-swap="innerHTML"
@@ -27,6 +44,8 @@ templ Header() {
 					</li>
 					<li class="nav-link">
 						<a
+							class="button"
+							data-button-variant="anchor"
 							hx-get="/blog"
 							hx-target="#content"
 							hx-swap="innerHTML "
@@ -35,6 +54,8 @@ templ Header() {
 					</li>
 					<li class="nav-link">
 						<a
+							class="button"
+							data-button-variant="anchor"
 							hx-get="/contact"
 							hx-target="#content"
 							hx-swap="innerHTML "

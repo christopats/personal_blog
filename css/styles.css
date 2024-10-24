@@ -9,58 +9,57 @@
     --color-bg-tertiary: #0e1418;
     --color-text-primary: #ffffff;
     --color-text-secondary: #bdbdbf;
-    --color-accent: #50f7d1;
+    --color-accent-base: #50f7d1;
+    --color-accent-strong: #29886E;
+
+    --color-global-bg: var(--color-bg-primary);
+    --color-global-text: var(--color-text-primary);
+    --color-heading1-text: var(--color-accent-base);
+    --color-card-bg: var(--color-bg-secondary);
+
 
     /* FONT */
 
     --font-family: "figtree", sans-serif;
 
-    --font-size-display-large: 6rem;
-    --font-size-display-medium: 3.25rem;
-    --font-size-display-small: 2.75rem;
-    --font-size-display-xsmall: 2.25rem;
-    --font-size-heading-xxlarge: 2.5rem;
-    --font-size-heading-xlarge: 2.25rem;
-    --font-size-heading-large: 2rem;
-    --font-size-heading-medium: 1.75rem;
-    --font-size-heading-small: 1.5rem;
-    --font-size-heading-xsmall: 1.25rem;
-    --font-size-labels-large: 1.125rem;
-    --font-size-labels-medium: 1rem;
-    --font-size-labels-small: 0.875rem;
-    --font-size-labels-xsmall: 0.75rem;
-    --font-size-paragraph-large: 1.125rem;
-    --font-size-paragraph-medium: 1rem;
-    --font-size-paragraph-small: 0.875rem;
-    --font-size-paragraph-xsmall: 0.75rem;
+    --font-size--2: clamp(0.64rem, 0.7134rem + -0.0947vw, 0.6944rem);
+    --font-size--1: clamp(0.8rem, 0.8449rem + -0.058vw, 0.8333rem);
+    --font-size-0: clamp(1rem, 1rem + 0vw, 1rem);
+    --font-size-1: clamp(1.2rem, 1.1826rem + 0.087vw, 1.25rem);
+    --font-size-2: clamp(1.44rem, 1.3974rem + 0.213vw, 1.5625rem);
+    --font-size-3: clamp(1.728rem, 1.6497rem + 0.3915vw, 1.9531rem);
+    --font-size-4: clamp(2.0736rem, 1.9457rem + 0.6397vw, 2.4414rem);
+    --font-size-5: clamp(2.4883rem, 2.2923rem + 0.9799vw, 3.0518rem);
+    --font-size-6: clamp(2.986rem, 2.6977rem + 1.4412vw, 3.8147rem);
 
-    --font-weight-display: 700;
-    --font-weight-heading: 700;
-    --font-weight-labels: 500;
-    --font-weight-paragraph: 400;
+    --font-weight-black: 700;
+    --font-weight-bold: 500;
+    --font-weight-base: 400;
+
+    --font-size-button: var(--font-size--1);
+    --font-size-base: var(--font-size-0);
+    --font-size-lede: var(--font-size--1);
+    --font-size-heading1: var(--font-size-6);
+    --font-size-heading2: var(--font-size-5);
+    --font-size-heading3: var(--font-size-4);
+    --font-size-heading4: var(--font-size-3);
 
     /* SPACING */
 
-    --padding-xlarge: 4rem;
-    --padding-large: 3rem;
-    --padding-medium: 2.25rem;
-    --padding-small: 1.5rem;
-    --padding-xsmall: 1rem;
-    --padding-xxsmall: 0.75rem;
+    --space-xs: clamp(0.75rem, 0.75rem + 0vw, 0.75rem);
+    --space-s: clamp(1rem, 1rem + 0vw, 1rem);
+    --space-m: clamp(1.5rem, 1.5rem + 0vw, 1.5rem);
+    --space-l: clamp(2rem, 2rem + 0vw, 2rem);
+    --space-xl: clamp(3rem, 3rem + 0vw, 3rem);
+    --space-2xl: clamp(4rem, 4rem + 0vw, 4rem);
+    --space-3xl: clamp(6rem, 6rem + 0vw, 6rem);
+    --space-4xl: clamp(6rem, 6rem + 0vw, 6rem);
 
-    --margin-xlarge: 4rem;
-    --margin-large: 3rem;
-    --margin-medium: 2.25rem;
-    --margin-small: 1.5rem;
-    --margin-xsmall: 1rem;
-    --margin-xxsmall: 0.75rem;
-
-    --gap-xlarge: 4rem;
-    --gap-large: 3rem;
-    --gap-medium: 2.25rem;
-    --gap-small: 1.5rem;
-    --gap-xsmall: 1rem;
-    --gap-xxsmall: 0.75rem;
+    --space-gutter: var(--space-m);
+    --space-gutter-s: var(--space-s);
+    --space-gutter-l: var(--space-l);
+    --space-regions: var(--space-xl);
+    --size-wrapper-max-width: 1135px;
 
     /* CORNER RADIUS */
 
@@ -71,10 +70,8 @@
 
     /* BREAKPOINTS */
 
-    --breakpoint-small: 480px;
-    --breakpoint-medium: 640px;
-    --breakpoint-large: 1024px;
-    --breakpoint-xlarge: 1280px;
+    --breakpoint-small: 48em;
+    --breakpoint-large: 64em;
 }
 
 /* // https://piccalil.li/blog/a-modern-css-reset */
@@ -156,13 +153,23 @@ svg {
 
 /* COMPOSITION */
 
+.flow>*+* {
+    margin-top: var(--space-xs)
+}
+
+.flex {
+    display: flex;
+}
+
+
+
 .container {
     --max-width: 1110px;
     --padding: 1rem;
     max-width: calc(min(var(--max-width), 100% - (var(--padding) * 2)));
     margin-inline: auto;
     display: grid;
-    min-height: 100vh;
+    min-height: calc(100dvh - 80px);
     grid-template-rows: auto;
     align-content: center;
 }
@@ -190,59 +197,36 @@ body {
 }
 
 h1 {
-    font-size: var(--font-size-display-large);
-    color: var(--color-accent);
+    font-size: var(--font-size-heading1);
+    color: var(--color-heading1-text);
     line-height: 1;
-    font-weight: var(--font-weight-display);
-
+    font-weight: var(--font-weight-black);
 }
 
-h1+p {
-    font-size: var(--font-size-heading-large);
+h1~h2 {
+    font-size: var(--font-size-heading1);
     color: var(--color-text-primary);
+    line-height: 1;
+    font-weight: var(--font-weight-black);
+}
+
+h1~p {
+    font-size: var(--font-size-base);
+    color: var(--color-text-primary);
+}
+
+p:has(+ h1) {
+    font-size: var(--font-size-base);
+    color: var(--color-text-secondary);
 }
 
 /* UTILITY CLASSES */
 
-.bg-primary {
-    background-color: var(--color-bg-primary);
+.gap-small {
+    display: flex;
+    gap: var(--space-s);
 }
 
-.bg-secondary {
-    background-color: var(--color-bg-secondary);
-}
-
-.bg-tertiary {
-    background-color: var(--color-bg-tertiary);
-}
-
-.text-primary {
-    color: var(--color-text-primary);
-}
-
-.text-secondary {
-    color: var(--color-text-secondary);
-}
-
-.text-accent {
-    color: var(--color-accent);
-}
-
-.rounded-large {
-    border-radius: var(--corner-radius-large);
-}
-
-.rounded-medium {
-    border-radius: var(--corner-radius-medium);
-}
-
-.rounded-small {
-    border-radius: var(--corner-radius-small);
-}
-
-.rounded-xsmall {
-    border-radius: var(--corner-radius-xsmall);
-}
 
 .navbar {
     display: flex;
@@ -250,7 +234,7 @@ h1+p {
     justify-content: space-between;
     width: 100%;
     padding: 1rem;
-    position: absolute;
+    position: relative;
 }
 
 .navbar .logo {
@@ -292,7 +276,7 @@ h1+p {
 }
 
 .burger-line {
-    background-color: var(--color-text-primary);
+    background-color: var(--color-text-secondary);
     width: 30px;
     height: 3px;
     margin: 6px 0;
@@ -348,10 +332,10 @@ h1+p {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(18, 28, 34, 0.75);
+    background-color: rgb(18, 28, 34);
     opacity: 0;
     visibility: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.15s ease;
     z-index: 15;
 }
 
@@ -359,4 +343,96 @@ h1+p {
 .open~.overlay {
     opacity: 1;
     visibility: visible;
+}
+
+/* BUTTON */
+
+.button {
+    --button-padding: 0.7em 1.2em;
+    --button-gap: 0.5em;
+    --button-bg: var(--color-accent-base);
+    --button-color: var(--color-bg-primary);
+    --button-hover-color: var(--color-accent-strong);
+    --button-hover-bg: var(--color-accent-strong);
+    --button-border-width: 2px;
+    --button-border-style: solid;
+    --button-border-color: var(--color-accent-base);
+    --button-radius: var(--corner-radius-xsmall);
+
+    display: inline-flex;
+    align-items: center;
+    gap: var(--button-gap);
+    padding: var(--button-padding);
+
+    background-color: var(--button-bg);
+    color: var(--button-color);
+
+    border-width: var(--button-border-width);
+    border-style: var(--button-border-style);
+    border-color: var(--button-border-color);
+    border-radius: var(--button-radius);
+
+    text-decoration: none;
+    font-weight: var(--button-font-weight, 400);
+    font-size: var(--font-size--1);
+    letter-spacing: 0.05ch;
+    font-family: sans-serif;
+    line-height: 1.1;
+
+    cursor: pointer;
+}
+
+.button:hover {
+    background-color: var(--button-hover-bg);
+    border-color: var(--button-hover-color);
+}
+
+.button:active {
+    background-color: var(--button-hover-bg);
+    border-color: var(--button-hover-color);
+
+}
+
+.button[data-button-variant="ghost"] {
+    --button-bg: transparent;
+    --button-border-color: var(--color-accent-base);
+    --button-color: var(--color-accent-base);
+}
+
+.button[data-button-variant="ghost"]:hover {
+    background-color: var(--color-bg-tertiary);
+    border-color: var(--color-text-secondary);
+    color: var(--color-text-secondary);
+
+}
+
+.button[data-button-variant="anchor"] {
+    position: relative;
+    color: var(--color-text-secondary);
+    background: none;
+    border: none;
+    cursor: pointer;
+    outline: none;
+    padding-inline: none;
+}
+
+.button[data-button-variant="anchor"]::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--color-accent-base);
+    transition: 0.3s ease;
+}
+
+
+.button[data-button-variant="anchor"]:hover::after {
+    color: var(--color-text-primary);
+    width: 100%;
+}
+
+.flex~.button {
+    gap: var(--space-m);
 }
