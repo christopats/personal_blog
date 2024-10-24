@@ -16,8 +16,8 @@ func main() {
 	mux.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
 
 
-	log.Println("Starting server on :4000")
-	err := http.ListenAndServe(":4000", mux)
+	log.Println("Starting server on :4206")
+	err := http.ListenAndServe(":4206", mux)
 	log.Fatal(err)
 
 }

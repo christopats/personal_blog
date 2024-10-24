@@ -10,66 +10,40 @@ templ Header() {
 					hx-push-url="true"
 				><img src="css/logo-nav.png" class="logo" height="60" width="auto" alt=""/></a>
 			</div>
-			// <div class="flex-none">
-			// 	<ul class="navlinks-desktop">
-			// 		<li>
-			// 			<a
-			// 				hx-get="/about"
-			// 				hx-target="#content"
-			// 				hx-swap="innerHTML"
-			// 				hx-push-url="true"
-			// 				class="btn btn-ghost"
-			// 			>About Me</a>
-			// 		</li>
-			// 		<li>
-			// 			<a
-			// 				hx-get="/blog"
-			// 				hx-target="#content"
-			// 				hx-swap="innerHTML "
-			// 				hx-push-url="true"
-			// 				class="btn btn-ghost"
-			// 			>Blog</a>
-			// 		</li>
-			// 		<li>
-			// 			<a
-			// 				hx-get="/contact"
-			// 				hx-target="#content"
-			// 				hx-swap="innerHTML "
-			// 				hx-push-url="true"
-			// 				class="btn btn-ghost"
-			// 			>Contact</a>
-			// 		</li>
-			// 	</ul>
-			// </div>
-			// <div x-data="{ open: false }" class="flex-col">
-			// 	<button @click="open = !open" class="mobile-nav-button">
-			// 		<svg width="48px" height="48px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-			// 			<path d="M4 18L20 18" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path>
-			// 			<path d="M4 12L20 12" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path>
-			// 			<path d="M4 6L20 6" stroke="#ffffff" stroke-width="2" stroke-linecap="round"></path>
-			// 		</svg>
-			// 	</button>
-			// 	<ul x-show="open" @click.outside="open = false" class="navlinks-mobile">
-			// 		<li>About me</li>
-			// 		<li>Blog</li>
-			// 		<li>Contact</li>
-			// 	</ul>
-			// </div>
-			<div x-data="{ open: false }" class="items-center">
-				<!-- Burger Icon -->
-				<div class="burger" @click="open = !open">
-					<div></div>
-					<div></div>
-					<div></div>
-				</div>
-				<!-- Menu -->
-				<div class="menu" x-show="open" @click.outside="open = false">
-					<a href="#">Home</a>
-					<a href="#">About</a>
-					<a href="#">Services</a>
-					<a href="#">Contact</a>
-				</div>
-			</div>
+			<nav x-data="{ open: false }" class="nav">
+				<button @click="open = !open" :class="{ 'open': open }" class="burger-menu">
+					<div class="burger-line line1"></div>
+					<div class="burger-line line2"></div>
+					<div class="burger-line line3"></div>
+				</button>
+				<ul :class="{ 'open : open' }" x-transition.origin.top.right @click.outside="open = false" class="nav-items" role="list">
+					<li class="nav-link">
+						<a
+							hx-get="/about"
+							hx-target="#content"
+							hx-swap="innerHTML"
+							hx-push-url="true"
+						>About Me</a>
+					</li>
+					<li class="nav-link">
+						<a
+							hx-get="/blog"
+							hx-target="#content"
+							hx-swap="innerHTML "
+							hx-push-url="true"
+						>Blog</a>
+					</li>
+					<li class="nav-link">
+						<a
+							hx-get="/contact"
+							hx-target="#content"
+							hx-swap="innerHTML "
+							hx-push-url="true"
+						>Contact</a>
+					</li>
+				</ul>
+				<div :class="{ 'open': open }" class="overlay" @click="open = false"></div>
+			</nav>
 		</div>
 	</header>
 }

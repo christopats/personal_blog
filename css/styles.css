@@ -99,6 +99,10 @@ ol[role="list"] {
     list-style: none;
 }
 
+a {
+    cursor: pointer;
+}
+
 /* Set core root defaults */
 html:focus-within {
     scroll-behavior: smooth;
@@ -240,127 +244,119 @@ h1+p {
     border-radius: var(--corner-radius-xsmall);
 }
 
-/* BLOCK */
-/* 
-
-    align-items: center;
-    position: absolute;
-
-    .flex {
-        display: flex;
-    }
-
-    .flex-col {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .logo {
-        height: 60px;
-        width: auto;
-    }
-
-
-    .mobile-nav-button {
-        position: fixed;
-        display: flex;
-        align-items: center;
-    }
-
-    .navlinks-mobile {
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        list-style-type: none;
-        gap: var(--gap-medium);
-        align-items: center;
-        position: relative;
-        top: 80px;
-
-    } */
-
-/* 
-    .navlinks-desktop {
-        visibility: hidden;
-    } */
-
 .navbar {
     display: flex;
-    width: 100vw;
-    justify-content: space-between;
     align-items: center;
-    padding: var(--padding-medium);
+    justify-content: space-between;
+    width: 100%;
+    padding: 1rem;
+    position: absolute;
 }
 
-.menu {
+.navbar .logo {
+    height: 48px;
+    width: auto;
+    z-index: 17;
+    position: relative;
+    z-index: 25;
+}
+
+
+.nav-items {
     display: none;
     flex-direction: column;
-    align-items: center;
-    gap: 10px;
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
     position: absolute;
-    top: 50px;
-    right: 20px;
-    z-index: 10;
-}
-
-.menu a {
-    text-decoration: none;
-    color: #333;
-}
-
-/* Burger Icon Styles */
-.burger {
-    cursor: pointer;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 30px;
-    height: 24px;
-    position: relative;
-}
-
-.burger div {
+    right: 1rem;
     width: 100%;
-    height: 3px;
+    align-items: flex-end;
+    justify-content: center;
+    text-align: center;
+    transition: 0.3s ease-in-out;
+    z-index: 20;
+}
+
+.nav-items>* {
+    margin-top: 1rem;
+}
+
+.open+.nav-items {
+    display: flex;
+}
+
+.burger-menu {
+    cursor: pointer;
+    border: none;
+    background-color: inherit;
+    position: relative;
+    z-index: 25;
+}
+
+.burger-line {
     background-color: var(--color-text-primary);
-    transition: transform 0.3s, opacity 0.3s;
+    width: 30px;
+    height: 3px;
+    margin: 6px 0;
+    transition: all 0.3s ease;
 }
 
-/* Burger to Cross Transition */
-.burger.open div:nth-child(1) {
-    transform: translateY(10px) rotate(45deg);
+.line1 {
+    transform: translateY(0) rotate(0);
 }
 
-.burger.open div:nth-child(2) {
+.line2 {
+    opacity: 1;
+}
+
+.line3 {
+    transform: translateY(0) rotate(0);
+}
+
+.open .line1 {
+    transform: translateY(9px) rotate(45deg);
+
+}
+
+.open .line2 {
     opacity: 0;
 }
 
-.burger.open div:nth-child(3) {
-    transform: translateY(-10px) rotate(-45deg);
+.open .line3 {
+    transform: translateY(-9px) rotate(-45deg);
 }
 
-/* [x-cloak] {
-    display: none;
-} */
+@media (min-width: 768px) {
+    .burger-menu {
+        display: none;
+    }
 
-/* Menu Animation */
-.menu-open {
-    display: flex;
-    animation: fadeIn 0.3s ease forwards;
+    .nav-items {
+        display: flex;
+        flex-direction: row;
+        position: static;
+        width: auto;
+        gap: 2rem;
+        margin-top: 0;
+    }
+
+
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
+/* Background overlay to increase opacity when nav is open */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(18, 28, 34, 0.75);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 15;
+}
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
+/* Show the overlay when nav is open */
+.open~.overlay {
+    opacity: 1;
+    visibility: visible;
 }
