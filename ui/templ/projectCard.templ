@@ -1,10 +1,16 @@
 package templ
 
+import "fmt"
+
 templ ProjectCard(projects ProjectPost) {
 	<div>
 		<img src={ projects.ImagePath } alt="project image example"/>
 		<h4>{ projects.Title }</h4>
 		<p>{ projects.Description }</p>
-		<button hx-get="/projectPage">check it out</button>
+		<button
+			hx-get={ fmt.Sprintf("/projects/%s", projects.Slug) }
+			hx-target="#content"
+			hx-push-url="true"
+		>check it out</button>
 	</div>
 }
