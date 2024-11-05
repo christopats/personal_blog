@@ -82,6 +82,36 @@ func fetchPostbySlug(slug string) *templ.BlogPost {
 	return nil
 }
 
+func fetchProjects() []templ.ProjectPost {
+	return []templ.ProjectPost{
+		{
+			Slug: "personal-site",
+			Title: "Personal Site",
+			Description: "My personal portfolio site project using Golang, Templ and HTMX",
+			ImagePath: "gopher.png",
+			Content: "I built this site using go and htmx. inspired by all the trendy youtubers, here are the steps i took",
+		},
+		{
+			Slug: "personal-site",
+			Title: "Personal Site",
+			Description: "My personal portfolio site project using Golang, Templ and HTMX",
+			ImagePath: "gopher.png",
+			Content: "I built this site using go and htmx. inspired by all the trendy youtubers, here are the steps i took",
+		},
+	} 
+}
+
+func fetchProjectBySlug(slug string) *templ.ProjectPost {
+	projects := fetchProjects()
+
+	for _, project := range projects {
+		if project.Slug == slug {
+			return &project
+		}
+	}
+	return nil
+}
+
 func Index(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/" {
@@ -153,6 +183,38 @@ func BlogPost(w http.ResponseWriter, r *http.Request) {
 		templ.Layout(templ.BlogArticle(post)).Render(r.Context(), w)
 	}
 } 
+
+func Projects(w http.ResponseWriter, r *http.Request) {
+	projects := fetchProjects()
+
+	if r.Header.Get("HX-Request") == "true" {
+		templ.Projects(projects).Render(r.Context(), w)
+	} else {
+		templ.Layout(templ.Projects(projects)).Render(r.Context(), w)
+	}
+}
+
+func ProjectPostPage(w http.ResponseWriter, r *http.Request) {
+	slug := strings.TrimPrefix(r.URL.Path, "/projects/")
+	if slug == "" {
+		http.NotFound(w, r)
+		return
+	}
+
+	project := fetchProjectBySlug(slug)
+	if project == nil {
+		http.NotFound(w, r)
+		return
+	}
+	
+
+	if r.Header.Get("HX-Request") == "true" {
+		templ.ProjectPage(project).Render(r.Context(), w)
+	} else {
+		templ.Layout(templ.ProjectPage(project)).Render(r.Context(), w)
+	}
+}
+
 
 func Contact(w http.ResponseWriter, r *http.Request) {
 	if r.Header.Get("HX-Request") == "true" {

@@ -8,18 +8,15 @@ package templ
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-import "time"
-
-type Project struct {
+type ProjectPost struct {
 	Slug        string
 	Title       string
 	Description string
-	Tags        []string
 	ImagePath   string
 	Content     string
 }
 
-func Projects(posts []BlogPost) templ.Component {
+func Projects(projects []ProjectPost) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -40,12 +37,12 @@ func Projects(posts []BlogPost) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"\"><h1 class=\"text-3xl font-bold my-8\">Blog Posts</h1><div class=\"grid_col_flex\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"\"><h1 class=\"font-bold my-8\">Projects</h1><div class=\"grid_col_flex\">")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		for _, post := range posts {
-			templ_7745c5c3_Err = BlogPostCard(post).Render(ctx, templ_7745c5c3_Buffer)
+		for _, project := range projects {
+			templ_7745c5c3_Err = ProjectCard(project).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

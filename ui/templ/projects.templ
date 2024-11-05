@@ -1,22 +1,19 @@
 package templ
 
-import "time"
-
-type Project struct {
+type ProjectPost struct {
 	Slug        string
 	Title       string
 	Description string
-	Tags        []string
 	ImagePath   string
 	Content     string
 }
 
-templ Projects(posts []BlogPost) {
+templ Projects(projects []ProjectPost) {
 	<div class="">
-		<h1 class="text-3xl font-bold my-8">Blog Posts</h1>
+		<h1 class="font-bold my-8">Projects</h1>
 		<div class="grid_col_flex">
-			for _, post := range posts {
-				@BlogPostCard(post)
+			for _, project := range projects {
+				@ProjectCard(project)
 			}
 		</div>
 	</div>
