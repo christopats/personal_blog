@@ -8,7 +8,13 @@ templ Home() {
 			<h2>Full-stack Web Developer</h2>
 			<p>Crafting stunning, user-friendly web applications to solve real world problems</p>
 			<div class="flex gap-small">
-				<button class="button">Who I am</button>
+				<button
+					class="button"
+					hx-get="/about"
+					hx-target="#content"
+					hx-swap="innerHTML"
+					hx-push-url="true"
+				>Who I am</button>
 				<button class="button" data-button-variant="ghost">What I do</button>
 			</div>
 		</div>

@@ -8,7 +8,18 @@ package templ
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
-func Home() templ.Component {
+import "time"
+
+type Project struct {
+	Slug        string
+	Title       string
+	Description string
+	Tags        []string
+	ImagePath   string
+	Content     string
+}
+
+func Projects(posts []BlogPost) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -29,7 +40,17 @@ func Home() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div><div class=\"flow\"><p>Hello, I'm</p><h1>Chris Pattison</h1><h2>Full-stack Web Developer</h2><p>Crafting stunning, user-friendly web applications to solve real world problems</p><div class=\"flex gap-small\"><button class=\"button\" hx-get=\"/about\" hx-target=\"#content\" hx-swap=\"innerHTML\" hx-push-url=\"true\">Who I am</button> <button class=\"button\" data-button-variant=\"ghost\">What I do</button></div></div></div>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<div class=\"\"><h1 class=\"text-3xl font-bold my-8\">Blog Posts</h1><div class=\"grid_col_flex\">")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		for _, post := range posts {
+			templ_7745c5c3_Err = BlogPostCard(post).Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</div></div>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
