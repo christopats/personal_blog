@@ -22,10 +22,8 @@ templ Header() {
 				</button>
 				<ul
 					x-show="open"
-					x-transition:enter.duration.1100ms
+					x-transition:enter.duration.400ms
 					x-transition:enter.scale.50
-					x-transition:leave..duration.400ms
-					x-transition:leave.scale.90
 					x-transition.scale.origin.top.right
 					:class="{ 'open' : open }"
 					@click.outside="open = false"
@@ -56,6 +54,16 @@ templ Header() {
 						<a
 							class="button"
 							data-button-variant="anchor"
+							hx-get="/projects"
+							hx-target="#content"
+							hx-swap="innerHTML"
+							hx-push-url="true"
+						>Projects</a>
+					</li>
+					<li class="nav-link">
+						<a
+							class="button"
+							data-button-variant="anchor"
 							hx-get="/contact"
 							hx-target="#content"
 							hx-swap="innerHTML "
@@ -64,6 +72,51 @@ templ Header() {
 					</li>
 				</ul>
 				<div :class="{ 'open': open }" class="overlay" @click="open = false"></div>
+				<ul
+					class="nav-items-desktop"
+					role="list"
+				>
+					<li class="nav-link">
+						<a
+							class="button"
+							data-button-variant="anchor"
+							hx-get="/about"
+							hx-target="#content"
+							hx-swap="innerHTML"
+							hx-push-url="true"
+						>About Me</a>
+					</li>
+					<li class="nav-link">
+						<a
+							class="button"
+							data-button-variant="anchor"
+							hx-get="/blog"
+							hx-target="#content"
+							hx-swap="innerHTML "
+							hx-push-url="true"
+						>Blog</a>
+					</li>
+					<li class="nav-link">
+						<a
+							class="button"
+							data-button-variant="anchor"
+							hx-get="/projects"
+							hx-target="#content"
+							hx-swap="innerHTML"
+							hx-push-url="true"
+						>Projects</a>
+					</li>
+					<li class="nav-link">
+						<a
+							class="button"
+							data-button-variant="anchor"
+							hx-get="/contact"
+							hx-target="#content"
+							hx-swap="innerHTML "
+							hx-push-url="true"
+						>Contact</a>
+					</li>
+				</ul>
 			</nav>
 		</div>
 	</header>
