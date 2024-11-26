@@ -9,6 +9,8 @@ import (
 	"time"
 )
 
+const version = "1.0.0"
+
 // CONFIG STRUCT HOLDS ALL APP SETTINGS
 type config struct {
 	port int
@@ -42,6 +44,7 @@ func main() {
 	}
 	// DECLARE OUR SERVEMUX AND HANDLERFUNCS
 	mux := http.NewServeMux()
+	mux.HandleFunc("/v1/healthcheck", app.healthCheckHandler)
 	mux.HandleFunc("/", app.Index)
 	mux.HandleFunc("/home", app.Home)
 	mux.HandleFunc("/about", app.About)
