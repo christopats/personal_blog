@@ -19,14 +19,14 @@ func (app *application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodPost, "/v1/blogs", app.createBlogHandler)
 	router.HandlerFunc(http.MethodGet, "/v1/blogs/:id", app.showBlogHandler)
 	
-	// router.HandlerFunc(http.MethodGet, "/home", app.Home)
-	// router.HandlerFunc(http.MethodGet, "/about", app.About)
-	// router.HandlerFunc(http.MethodGet, "/blog", app.Blog)
-	// router.HandlerFunc(http.MethodGet, "/blog/", app.BlogPost)
-	// router.HandlerFunc(http.MethodGet, "/projects", app.Projects)
-	// router.HandlerFunc(http.MethodGet, "/projects/", app.ProjectPostPage)
-	// router.HandlerFunc(http.MethodGet, "/contact", app.Contact)
-	router.Handler(http.MethodGet, "/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+	router.HandlerFunc(http.MethodGet, "/home", app.Home)
+	router.HandlerFunc(http.MethodGet, "/about", app.About)
+	router.HandlerFunc(http.MethodGet, "/blog", app.Blog)
+	router.HandlerFunc(http.MethodGet, "/blog/", app.BlogPost)
+	router.HandlerFunc(http.MethodGet, "/projects", app.Projects)
+	router.HandlerFunc(http.MethodGet, "/projects/", app.ProjectPostPage)
+	router.HandlerFunc(http.MethodGet, "/contact", app.Contact)
+	router.ServeFiles("/css/*filepath", http.Dir("css"))
 
 	return router
 
