@@ -4,11 +4,9 @@ import (
 	"context"
 	"fmt"
 	"net/http"
-	"strconv"
 	"time"
 
 	"github.com/christopats/go-blogv2/ui/templ"
-	"github.com/julienschmidt/httprouter"
 )
 
 func fetchBlogPost() []templ.BlogPost {
@@ -132,13 +130,9 @@ func (app *application) createBlogHandler (w http.ResponseWriter, r *http.Reques
 
 func (app *application) showBlogHandler (w http.ResponseWriter, r *http.Request) {
 	
-	// HTTPROUTER USES PARAMSFROMCONTEXT TO RETRIEVE PARAM NAMES AND VALUES FROM REQUEST CONTEXT
-	params := httprouter.ParamsFromContext(r.Context())
-
-	// BYNAME() GETS THE ID VALUE FROM THE SLICE BUT RETURNS A STRING
-	// STRCONV CONVERTS RETURNED VALUE FROM STRING TO INT - BASE 10, 64 BIT
-	id, err := strconv.ParseInt(params.ByName("id"), 10, 64)
-	if err != nil || id < 1 {
+	// USING READIDPARAM() HELPER METHOD, READ ID FROM REQUEST CONTEXT
+	id, err := app.readIDParam(r)
+	if err != nil {
 		http.NotFound(w, r)
 		return
 	}
