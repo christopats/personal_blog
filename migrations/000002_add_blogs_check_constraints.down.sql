@@ -1,0 +1,1 @@
+ALTER TABLE blogs DROP CONSTRAINTS IF EXISTS tags_length_check;
