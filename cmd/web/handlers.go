@@ -2,11 +2,13 @@ package main
 
 import (
 	"context"
+	"fmt"
 	"net/http"
-	"strings"
+	"strconv"
 	"time"
 
 	"github.com/christopats/go-blogv2/ui/templ"
+	"github.com/julienschmidt/httprouter"
 )
 
 func fetchBlogPost() []templ.BlogPost {
@@ -123,104 +125,126 @@ func (app *application) Index(w http.ResponseWriter, r *http.Request) {
 	templ.Layout(templ.Home()).Render(context.Background(), w)
 }
 
-func (app *application) Home(w http.ResponseWriter, r *http.Request) {
+func (app *application) createBlogHandler (w http.ResponseWriter, r *http.Request) {
+	// RETURN PLAIN TEXT FOR TIME BEING
+	fmt.Fprintln(w, "create a new blog")
+}
 
-	if r.URL.Path != "/home" {
+func (app *application) showBlogHandler (w http.ResponseWriter, r *http.Request) {
+	
+	// HTTPROUTER USES PARAMSFROMCONTEXT TO RETRIEVE PARAM NAMES AND VALUES FROM REQUEST CONTEXT
+	params := httprouter.ParamsFromContext(r.Context())
+
+	// BYNAME() GETS THE ID VALUE FROM THE SLICE BUT RETURNS A STRING
+	// STRCONV CONVERTS RETURNED VALUE FROM STRING TO INT - BASE 10, 64 BIT
+	id, err := strconv.ParseInt(params.ByName("id"), 10, 64)
+	if err != nil || id < 1 {
 		http.NotFound(w, r)
 		return
 	}
-	w.Header().Set("Content-type", "text/html")
 
-	if r.Header.Get("HX-Request") == "true" {
-		templ.Home().Render(context.Background(), w)
-	} else {
-		templ.Layout(templ.Home()).Render(context.Background(), w)
-	}
+	// INTERPOLATE ID INTO RESPONSE
+	fmt.Fprintf(w, "show blog %d\n", id)
+}
+
+// func (app *application) Home(w http.ResponseWriter, r *http.Request) {
+
+// 	if r.URL.Path != "/home" {
+// 		http.NotFound(w, r)
+// 		return
+// 	}
+// 	w.Header().Set("Content-type", "text/html")
+
+// 	if r.Header.Get("HX-Request") == "true" {
+// 		templ.Home().Render(context.Background(), w)
+// 	} else {
+// 		templ.Layout(templ.Home()).Render(context.Background(), w)
+// 	}
 
 	
-}
+// }
 
-func (app *application) About(w http.ResponseWriter, r *http.Request) {
+// func (app *application) About(w http.ResponseWriter, r *http.Request) {
 
-	if r.URL.Path != "/about" {
-		http.NotFound(w, r)
-		return
-	}
+// 	if r.URL.Path != "/about" {
+// 		http.NotFound(w, r)
+// 		return
+// 	}
 
-	w.Header().Set("Content-type", "text/html")
+// 	w.Header().Set("Content-type", "text/html")
 	
-	if r.Header.Get("HX-Request") == "true" {
-		templ.About().Render(context.Background(), w)
-	} else {
-		templ.Layout(templ.About()).Render(context.Background(), w)
-	}
-}
+// 	if r.Header.Get("HX-Request") == "true" {
+// 		templ.About().Render(context.Background(), w)
+// 	} else {
+// 		templ.Layout(templ.About()).Render(context.Background(), w)
+// 	}
+// }
 
-func (app *application) Blog(w http.ResponseWriter, r *http.Request) {
-	posts := fetchBlogPost()
+// func (app *application) Blog(w http.ResponseWriter, r *http.Request) {
+// 	posts := fetchBlogPost()
 
-	if r.Header.Get("HX-Request") == "true" {
-		templ.Blog(posts).Render(r.Context(), w)
-	} else {
-		templ.Layout(templ.Blog(posts)).Render(r.Context(), w)
-	}
-}
+// 	if r.Header.Get("HX-Request") == "true" {
+// 		templ.Blog(posts).Render(r.Context(), w)
+// 	} else {
+// 		templ.Layout(templ.Blog(posts)).Render(r.Context(), w)
+// 	}
+// }
 
-func (app *application) BlogPost(w http.ResponseWriter, r *http.Request) {
-	slug := strings.TrimPrefix(r.URL.Path, "/blog/")
-	if slug == "" {
-		http.NotFound(w, r)
-		return
-	}
-	post := fetchPostbySlug(slug)
-	if post == nil {
-		http.NotFound(w, r)
-		return
-	}
-	if r.Header.Get("HX-Request") == "true" {
-		templ.BlogArticle(post).Render(r.Context(), w)
-	} else {
-		templ.Layout(templ.BlogArticle(post)).Render(r.Context(), w)
-	}
-} 
+// func (app *application) BlogPost(w http.ResponseWriter, r *http.Request) {
+// 	slug := strings.TrimPrefix(r.URL.Path, "/blog/")
+// 	if slug == "" {
+// 		http.NotFound(w, r)
+// 		return
+// 	}
+// 	post := fetchPostbySlug(slug)
+// 	if post == nil {
+// 		http.NotFound(w, r)
+// 		return
+// 	}
+// 	if r.Header.Get("HX-Request") == "true" {
+// 		templ.BlogArticle(post).Render(r.Context(), w)
+// 	} else {
+// 		templ.Layout(templ.BlogArticle(post)).Render(r.Context(), w)
+// 	}
+// } 
 
-func (app *application) Projects(w http.ResponseWriter, r *http.Request) {
-	projects := fetchProjects()
+// func (app *application) Projects(w http.ResponseWriter, r *http.Request) {
+// 	projects := fetchProjects()
 
-	if r.Header.Get("HX-Request") == "true" {
-		templ.Projects(projects).Render(r.Context(), w)
-	} else {
-		templ.Layout(templ.Projects(projects)).Render(r.Context(), w)
-	}
-}
+// 	if r.Header.Get("HX-Request") == "true" {
+// 		templ.Projects(projects).Render(r.Context(), w)
+// 	} else {
+// 		templ.Layout(templ.Projects(projects)).Render(r.Context(), w)
+// 	}
+// }
 
-func (app *application) ProjectPostPage(w http.ResponseWriter, r *http.Request) {
-	slug := strings.TrimPrefix(r.URL.Path, "/projects/")
-	if slug == "" {
-		http.NotFound(w, r)
-		return
-	}
+// func (app *application) ProjectPostPage(w http.ResponseWriter, r *http.Request) {
+// 	slug := strings.TrimPrefix(r.URL.Path, "/projects/")
+// 	if slug == "" {
+// 		http.NotFound(w, r)
+// 		return
+// 	}
 
-	project := fetchProjectBySlug(slug)
-	if project == nil {
-		http.NotFound(w, r)
-		return
-	}
+// 	project := fetchProjectBySlug(slug)
+// 	if project == nil {
+// 		http.NotFound(w, r)
+// 		return
+// 	}
 	
 
-	if r.Header.Get("HX-Request") == "true" {
-		templ.ProjectPage(project).Render(r.Context(), w)
-	} else {
-		templ.Layout(templ.ProjectPage(project)).Render(r.Context(), w)
-	}
-}
+// 	if r.Header.Get("HX-Request") == "true" {
+// 		templ.ProjectPage(project).Render(r.Context(), w)
+// 	} else {
+// 		templ.Layout(templ.ProjectPage(project)).Render(r.Context(), w)
+// 	}
+// }
 
 
-func (app *application) Contact(w http.ResponseWriter, r *http.Request) {
-	if r.Header.Get("HX-Request") == "true" {
-		templ.Contact().Render(context.Background(), w)
-	} else {
-		templ.Layout(templ.Contact()).Render(context.Background(), w)
-	}
-}
+// func (app *application) Contact(w http.ResponseWriter, r *http.Request) {
+// 	if r.Header.Get("HX-Request") == "true" {
+// 		templ.Contact().Render(context.Background(), w)
+// 	} else {
+// 		templ.Layout(templ.Contact()).Render(context.Background(), w)
+// 	}
+// }
 
