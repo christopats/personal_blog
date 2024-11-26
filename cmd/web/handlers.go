@@ -112,7 +112,7 @@ func fetchProjectBySlug(slug string) *templ.ProjectPost {
 	return nil
 }
 
-func Index(w http.ResponseWriter, r *http.Request) {
+func (app *application) Index(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/" {
 		http.NotFound(w, r)
@@ -123,7 +123,7 @@ func Index(w http.ResponseWriter, r *http.Request) {
 	templ.Layout(templ.Home()).Render(context.Background(), w)
 }
 
-func Home(w http.ResponseWriter, r *http.Request) {
+func (app *application) Home(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/home" {
 		http.NotFound(w, r)
@@ -140,7 +140,7 @@ func Home(w http.ResponseWriter, r *http.Request) {
 	
 }
 
-func About(w http.ResponseWriter, r *http.Request) {
+func (app *application) About(w http.ResponseWriter, r *http.Request) {
 
 	if r.URL.Path != "/about" {
 		http.NotFound(w, r)
@@ -156,7 +156,7 @@ func About(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func Blog(w http.ResponseWriter, r *http.Request) {
+func (app *application) Blog(w http.ResponseWriter, r *http.Request) {
 	posts := fetchBlogPost()
 
 	if r.Header.Get("HX-Request") == "true" {
@@ -166,7 +166,7 @@ func Blog(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func BlogPost(w http.ResponseWriter, r *http.Request) {
+func (app *application) BlogPost(w http.ResponseWriter, r *http.Request) {
 	slug := strings.TrimPrefix(r.URL.Path, "/blog/")
 	if slug == "" {
 		http.NotFound(w, r)
@@ -184,7 +184,7 @@ func BlogPost(w http.ResponseWriter, r *http.Request) {
 	}
 } 
 
-func Projects(w http.ResponseWriter, r *http.Request) {
+func (app *application) Projects(w http.ResponseWriter, r *http.Request) {
 	projects := fetchProjects()
 
 	if r.Header.Get("HX-Request") == "true" {
@@ -194,7 +194,7 @@ func Projects(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func ProjectPostPage(w http.ResponseWriter, r *http.Request) {
+func (app *application) ProjectPostPage(w http.ResponseWriter, r *http.Request) {
 	slug := strings.TrimPrefix(r.URL.Path, "/projects/")
 	if slug == "" {
 		http.NotFound(w, r)
@@ -216,7 +216,7 @@ func ProjectPostPage(w http.ResponseWriter, r *http.Request) {
 }
 
 
-func Contact(w http.ResponseWriter, r *http.Request) {
+func (app *application) Contact(w http.ResponseWriter, r *http.Request) {
 	if r.Header.Get("HX-Request") == "true" {
 		templ.Contact().Render(context.Background(), w)
 	} else {
