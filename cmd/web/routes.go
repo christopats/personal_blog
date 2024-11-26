@@ -26,7 +26,7 @@ func (app *application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodGet, "/projects", app.Projects)
 	router.HandlerFunc(http.MethodGet, "/projects/", app.ProjectPostPage)
 	router.HandlerFunc(http.MethodGet, "/contact", app.Contact)
-	router.ServeFiles("/css/*filepath", http.Dir("css"))
+	router.ServeFiles("/static/*filepath", http.Dir("static"))
 
 	return router
 
