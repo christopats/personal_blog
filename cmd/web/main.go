@@ -43,23 +43,14 @@ func main() {
 		logger: logger,
 	}
 	// DECLARE OUR SERVEMUX AND HANDLERFUNCS
-	mux := http.NewServeMux()
-	mux.HandleFunc("/v1/healthcheck", app.healthCheckHandler)
-	mux.HandleFunc("/", app.Index)
-	mux.HandleFunc("/home", app.Home)
-	mux.HandleFunc("/about", app.About)
-	mux.HandleFunc("/blog", app.Blog)
-	mux.HandleFunc("/blog/", app.BlogPost)
-	mux.HandleFunc("/projects", app.Projects)
-	mux.HandleFunc("/projects/", app.ProjectPostPage)
-	mux.HandleFunc("/contact", app.Contact)
-	mux.Handle("/css/", http.StripPrefix("/css/", http.FileServer(http.Dir("css"))))
+	// HANDLEFUNCS MOVED TO ROUTES.GO, USE HTTPROUTER INSTEAD OF SERVEMUX
+
 
 
 	// INIT OUR CUSTOM HTTP SERVER 
 	srv := &http.Server{
 		Addr: fmt.Sprintf(":%d", cfg.port),
-		Handler: mux,
+		Handler: app.routes(),
 		IdleTimeout: time.Minute,
 		ReadTimeout: 10 * time.Second,
 		WriteTimeout: 30 * time.Second,
