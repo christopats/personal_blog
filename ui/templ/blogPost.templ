@@ -7,7 +7,6 @@ templ BlogPostCard(post BlogPost) {
 		hx-get={ fmt.Sprintf("/blog/%s", post.Slug) }
 		hx-target="#content"
 		hx-push-url="true"
-		class="card grid bg-base-100 shadow-xl transition-all duration-300 ease-in-out hover:shadow-2xl hover:scale-105 hover:bg-base-200 cursor-pointer"
 	>
 		<figure>
 			<img
@@ -15,10 +14,10 @@ templ BlogPostCard(post BlogPost) {
 				alt="Shoes"
 			/>
 		</figure>
-		<div class="card-body">
-			<h2 class="card-title">
+		<div>
+			<h2>
 				{ post.Title }
-				<div class="badge badge-secondary">NEW</div>
+				<div>NEW</div>
 			</h2>
 			<p>
 				{ post.Description }
@@ -27,9 +26,9 @@ templ BlogPostCard(post BlogPost) {
 				{ post.Date.Format("Jan 02, 2006") }
 			</p>
 			if len(post.Tags) > 0 {
-				<div class="card-actions justify-end">
+				<div>
 					for _, tag := range post.Tags {
-						<span class="badge badge-outline">{ tag } </span>
+						<span>{ tag } </span>
 					}
 				</div>
 			}
