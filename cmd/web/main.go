@@ -9,6 +9,7 @@ import (
 	"os"
 	"time"
 
+	"github.com/christopats/go-blogv2/internal/data"
 	"github.com/jackc/pgx/v5/pgxpool"
 )
 
@@ -28,6 +29,7 @@ type config struct {
 type application struct {
 	config config
 	logger *log.Logger
+	models data.Models
 }
 
 func main() {

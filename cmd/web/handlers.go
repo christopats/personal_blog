@@ -8,6 +8,7 @@ import (
 
 	"github.com/christopats/go-blogv2/internal/data"
 	"github.com/christopats/go-blogv2/ui/templ"
+	"github.com/christopats/go-blogv2/validator"
 )
 
 // func fetchBlogPost() []data.BlogPost {
@@ -125,8 +126,48 @@ func (app *application) Index(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) createBlogHandler (w http.ResponseWriter, r *http.Request) {
-	// RETURN PLAIN TEXT FOR TIME BEING
-	fmt.Fprintln(w, "create a new blog")
+	var input struct {
+		Title string `json:"title"`
+		Description string `json:"description"`
+		Content string `json:"content"`
+		Tags []string `json:"tags"`
+		Slug string `json:"slug"`
+	}
+
+	err := app.readJSON(w, r, &input)
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	blog := &data.BlogPost{
+		Title: input.Title,
+		Description: input.Description,
+		Content: input.Content,
+		Tags: input.Tags,
+		Slug: input.Slug,
+	}
+
+	v := validator.New()
+
+	if data.ValidateBlog(v, blog); !v.Valid() {
+		app.failedValidationResponse(w, r, v.Errors)
+		return
+	}
+
+	err = app.models.BlogPost.Insert(blog)
+	if err != nil {
+		http.NotFound(w, r)
+		return
+	}
+
+	headers := make(http.Header)
+	headers.Set("Location", fmt.Sprintf("/v1/blogs/%d", blog.ID))
+
+	err = app.writeJSON(w, http.StatusCreated, envelope{"blog": blog}, headers)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
 }
 
 func (app *application) showBlogHandler (w http.ResponseWriter, r *http.Request) {
@@ -145,7 +186,6 @@ func (app *application) showBlogHandler (w http.ResponseWriter, r *http.Request)
 		Description: "This is a blog post",
 		Content: "Hello, World!",
 		Tags: []string{"Go", "HTMX", "Learning"},
-		Version: 1,
 	}
 
 	// INTERPOLATE ID INTO RESPONSE
