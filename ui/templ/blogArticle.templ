@@ -1,6 +1,8 @@
 package templ
 
-templ BlogArticle(post *BlogPost) {
+import "github.com/christopats/go-blogv2/internal/data"
+
+templ BlogArticle(post *data.BlogPost) {
 	<article>
 		<div>
 			<img src="{post.ImagePath}" alt=""/>
@@ -15,7 +17,7 @@ templ BlogArticle(post *BlogPost) {
 				</div>
 			}
 			<p>{ post.Description }</p>
-			<small>{ post.Date.Format("Jan 02, 2006") }</small>
+			<small>{ post.CreatedAt.Format("Jan 02, 2006") }</small>
 		</div>
 		<div>
 			<p>{ post.Content }</p>

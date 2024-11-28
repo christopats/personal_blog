@@ -1,8 +1,9 @@
 package templ
 
 import "fmt"
+import "github.com/christopats/go-blogv2/internal/data"
 
-templ BlogPostCard(post BlogPost) {
+templ BlogPostCard(post data.BlogPost) {
 	<div
 		hx-get={ fmt.Sprintf("/blog/%s", post.Slug) }
 		hx-target="#content"
@@ -23,7 +24,7 @@ templ BlogPostCard(post BlogPost) {
 				{ post.Description }
 			</p>
 			<p>
-				{ post.Date.Format("Jan 02, 2006") }
+				{ post.CreatedAt.Format("Jan 02, 2006") }
 			</p>
 			if len(post.Tags) > 0 {
 				<div>

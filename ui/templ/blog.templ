@@ -1,18 +1,8 @@
 package templ
 
-import "time"
+import "github.com/christopats/go-blogv2/internal/data"
 
-type BlogPost struct {
-	Slug        string
-	Title       string
-	Description string
-	Date        time.Time
-	Tags        []string
-	ImagePath   string
-	Content     string
-}
-
-templ Blog(posts []BlogPost) {
+templ Blog(posts []data.BlogPost) {
 	<div class="">
 		<h1 class="text-3xl font-bold my-8">Blog Posts</h1>
 		<div class="grid_col_flex">
